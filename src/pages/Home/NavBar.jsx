@@ -1,6 +1,10 @@
 import styled from "styled-components"
 import { ReactComponent as Logo } from "../../images/logo.svg"
 import {useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import Common from "../../utils/Common";
+import memberAxiosApi from "../../api/memberAxios";
+
 const NavCss=styled.div`
     background-color: #ffffff;
     max-width:1280px ;
@@ -54,25 +58,75 @@ const NavCss=styled.div`
 }
 `;
 
-
 const Logobox=styled.div`
   margin: -30px;
+`;
+
+const Logout = styled.div`
+    h1 {
+        font-size: 20px;
+        display: flex;
+        justify-content: end;
+    }
+    div {
+       
+    }
 `;
 
 
  const NavBar = () =>{
     const navigate = useNavigate();
+    // const {nickName, setNickName} = useState();
+    const {name, setName} = useState();
+    const [member, setMember] = useState({});
+    // const {addr, temp} = useWeather();
+
+    useEffect(() => {
+        const getMember = async () => {
+        const accessToken = Common.getAccessToken();
+        try {
+            const rsp = await memberAxiosApi.memberGetOne();
+            setMember(rsp.data);
+            setName(rsp.data.name);
+        } catch (e) {
+            // 엑세스토큰 유효기간 지나면 401
+            if (e.response.status === 401) {
+            // 리플레쉬토큰으로 재발급 받기
+            await Common.handleUnauthorized();
+            const newToken = Common.getAccessToken();
+            if (newToken !== accessToken) {
+                const rsp = await memberAxiosApi.memberGetOne(); // 전체 조회
+                setMember(rsp.data);
+                setName(rsp.data.name);
+             }
+            }
+        }
+        };
+        getMember();
+    }, [name]);
+
+
     return(
        
         <NavCss> 
-         <div className="content1">
-         <div className="content1ul">
-            <ul>
-                <li><div onClick={()=>{navigate("/Login")}}>로그인</div></li>
-                <li><div onClick={()=>{navigate("/Signup")}}>회원가입</div></li>
-            </ul>
+         <header className="content1">
+            <div className="content1ul">
+                <ul>
+                     { name !=="null" ? ( 
+                      <Logout>
+                        <h1 style={{fontWeight: "bold"}}>{member.name}님 환영합니다!</h1>
+                        <div onClick={() => {navigate("/")}}>로그아웃</div>
+                      </Logout>
+                      ):(
+                        <>
+                            <li><div onClick={()=>{navigate("/Login")}}>로그인</div></li>
+                            <li><div onClick={()=>{navigate("/Signup")}}>회원가입</div></li>
+                        </>
+                        )}
+                </ul>
             </div>
-         </div>
+         </header>
+
          <div className="content2">
          <div className="content2ul">
             <ul>
@@ -89,10 +143,6 @@ const Logobox=styled.div`
                     </ul>
             </div>
          </div>
-
-      
- 
-       
         </NavCss>
    
     )

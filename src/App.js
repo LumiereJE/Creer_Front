@@ -2,8 +2,8 @@ import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import {Main} from "./pages/Home/Main";
 import Home from "./pages/Home/Home";
-import {Login} from "./pages/member/Login"; 
-import {Signup} from "./pages/member/Signup"; 
+import Login from "./pages/signup/Login"; 
+import Signup from "./pages/signup/Signup"; 
 import { Auction } from "./pages/auction/Auction";
 import { Goods } from "./pages/goods/Goods"; 
 import { Class } from "./pages/class/Class"; 
@@ -18,7 +18,7 @@ function App() {
             <Route element={<Main/>}>
               {/*헤더영역 공통 레이아웃*/}        
               <Route path="/" element={<Home/>} >    </Route>  
-              <Route path="/Login" element={<Login/>} >    </Route>  
+              <Route path="/Login" element={<Login/>} >    </Route>   
               <Route path="/Signup" element={<Signup/>} >    </Route>  
               <Route path="/Auction" element={<Auction/>} >    </Route>  
               <Route path="/Class" element={<Class/>} >    </Route>  
