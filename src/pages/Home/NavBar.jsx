@@ -90,16 +90,17 @@ const Logout = styled.div`
             setName(rsp.data.name);
         } catch (e) {
             // 엑세스토큰 유효기간 지나면 401
-            if (e.response.status === 401) {
-            // 리플레쉬토큰으로 재발급 받기
-            await Common.handleUnauthorized();
-            const newToken = Common.getAccessToken();
-            if (newToken !== accessToken) {
-                const rsp = await memberAxiosApi.memberGetOne(); // 전체 조회
-                setMember(rsp.data);
-                setName(rsp.data.name);
-             }
-            }
+            // if (e.response.status === 401) {
+            // // 리플레쉬토큰으로 재발급 받기
+            // await Common.handleUnauthorized();
+            // const newToken = Common.getAccessToken();
+            // if (newToken !== accessToken) {
+            //     const rsp = await memberAxiosApi.memberGetOne(); // 전체 조회
+            //     setMember(rsp.data);
+            //     setName(rsp.data.name);
+            //  }
+            // }
+            
         }
         };
         getMember();
