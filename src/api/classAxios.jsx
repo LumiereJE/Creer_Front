@@ -26,3 +26,4 @@ const ClassAxiosApi = {
   },
 
 }
+export default ClassAxiosApi;

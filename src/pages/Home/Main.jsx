@@ -1,5 +1,5 @@
 import { Outlet, useNavigate } from "react-router-dom";
-import NavBar from "./NavBar";
+import {NavBar} from "./NavBar";
 import FootBar from "./Foot";
 import styled from "styled-components"
 

@@ -1,8 +1,9 @@
 import styled, { css } from "styled-components";
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from "react";
-import ClassAxiosApi from "../../api/ClassAxios";
+import ClassAxiosApi from "../../api/classAxios";
 import { storage } from "../../api/FireBase";
+
 const CommunityCss = styled.div`
 width: 80%;
 margin: 0 auto;
@@ -255,3 +256,4 @@ export const Class = () =>{
         </>
     )
 }
+

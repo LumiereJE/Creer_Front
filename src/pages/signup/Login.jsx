@@ -69,6 +69,7 @@ const Login = () => {
       console.log("refreshToken : ", res.data.refreshToken);
       window.localStorage.setItem("accessToken", res.data.accessToken); // 브라우저에서 임시로 값을 저장하는 기술
       window.localStorage.setItem("refreshToken", res.data.refreshToken);
+      window.localStorage.setItem("isLogin", "true");
       navigate("/");
     } else {
       setModalOpen(true);
