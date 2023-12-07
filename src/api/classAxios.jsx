@@ -1,7 +1,7 @@
 import axios from "axios";
 import Common from "../utils/Common";
 
-const ClassAxiosApi = {
+export const ClassAxiosApi = {
     
   // 클래스 생성  
   boardWrite: async (title, category, area, classImg,info,price,level,runnigTime,maxPeople) => {
@@ -26,4 +26,3 @@ const ClassAxiosApi = {
   },
 
 }
-export default ClassAxiosApi;
